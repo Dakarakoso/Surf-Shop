@@ -8,7 +8,11 @@
 </div>
 <div>Location: <%= post.location %>
 </div>
-
+<div>
+    <% post.images.forEach(function(image) {%>
+        <img src="<%=image.url%>" alt="Surf board image">
+        <% }); %>
+</div>
 <div>
     <a href="/posts/<%=post.id%>/edit">
         <button>Edit</button>
