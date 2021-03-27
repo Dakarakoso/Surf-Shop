@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const { postRegister, postLogin, getLogout } = require('../controllers/index');
 const { asyncErrorHandler } = require('../middleware/index');
 
