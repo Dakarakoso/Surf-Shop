@@ -22,7 +22,7 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 //connect to the database
-const dbUrl = 'mongodb://localhost:27017/surf-shop';
+const dbUrl = 'mongodb://localhost:27017/surf-shop-mapbox';
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -41,6 +41,8 @@ db.once("open", () => {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// setup public assets directory
+app.use(express.static('public'));
 
 app.use(logger('dev'));
 app.use(express.json());
