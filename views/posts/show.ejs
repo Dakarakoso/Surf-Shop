@@ -1,3 +1,36 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        width: 700px;
+        height: 400px;
+    }
+
+    .marker {
+        background-image: url('/images/mapbox-icon.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .mapboxgl-popup {
+        max-width: 200px;
+    }
+
+    .mapboxgl-popup-content {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+</style>
+
 <h1>This is the Show page</h1>
 <h2>
     <%=post.title%>
@@ -13,6 +46,7 @@
         <img src="<%=image.url%>" alt="Surf board image">
         <% }); %>
 </div>
+<div id='map'></div>
 <div>
     <a href="/posts/<%=post.id%>/edit">
         <button>Edit</button>
@@ -24,3 +58,33 @@
         <input type="submit" value="Delete">
     </form>
 </div>
+
+
+<script>
+    var post = <%- JSON.stringify(post) %>
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrYXJha29zbyIsImEiOiJja200Njl2ZTgwMWpuMm9vamo2N2g0cmF2In0.HM1PmvieXxXIhVZGIUQWiw';
+ 
+  
+ var map = new mapboxgl.Map({
+ container: 'map',
+ style: 'mapbox://styles/mapbox/light-v10',
+ center: post.coordinates,
+ zoom: 5
+ });
+  
+ 
+ // create a HTML element for each feature
+ var el = document.createElement('div');
+ el.className = 'marker';
+  
+ // make a marker for each feature and add it to the map
+ new mapboxgl.Marker(el)
+ .setLngLat(post.coordinates)
+ .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+ .setHTML('<h3>' + post.title + '</h3><p>' + post.description + '</p>' ))
+ .addTo(map);
+ 
+
+
+</script>
