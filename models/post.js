@@ -4,31 +4,44 @@ const Review = require('./review');
 const mongoosePaginate = require('mongoose-paginate');
 
 const PostSchema = new Schema({
-    title: String,
-    price: String,
-    description: String,
-    images: [{ url: String, public_id: String }],
-    location: String,
-    coordinates: Array,
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    reviews: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
-    ],
-    avgRating: {  type:Number, default:0 }
+	title: String,
+	price: String,
+	description: String,
+	images: [ { url: String, public_id: String } ],
+	location: String,
+	geometry: {
+		type: {
+			type: String,
+			enum: ['Point'],
+			required: true
+		},
+		coordinates: {
+			type: [Number],
+			required: true
+		}
+	},
+	properties: {
+		description: String
+	},
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	reviews: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Review'
+		}
+	],
+	avgRating: { type: Number, default: 0 }
 });
 
-PostSchema.pre('remove', async function () {
-    await Review.remove({
-        _id: {
-            $in: this.reviews
-        }
-    });
+PostSchema.pre('remove', async function() {
+	await Review.remove({
+		_id: {
+			$in: this.reviews
+		}
+	});
 });
 
 PostSchema.methods.calculateAvgRating = function() {

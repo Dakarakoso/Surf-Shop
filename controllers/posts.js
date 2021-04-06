@@ -2,6 +2,7 @@ const Post = require('../models/post');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
 const cloudinary = require('cloudinary');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
@@ -13,10 +14,15 @@ module.exports = {
 	async postIndex(req, res, next) {
 		let posts = await Post.paginate({}, {
 			page: req.query.page || 1,
-			limit: 10
+			limit: 10,
+			sort: '-_id'
 		});
 		posts.page = Number(posts.page);
-		res.render('posts/index', { posts });
+		res.render('posts/index', { 
+			posts, 
+			mapBoxToken, 
+			title: 'Posts Index' 
+		});
 	},
 	// Posts New
 	postNew(req, res, next) {
@@ -38,9 +44,11 @@ module.exports = {
 		    limit: 1
 		  })
 		  .send();
-		req.body.post.coordinates = response.body.features[0].geometry.coordinates;
-		let post = await Post.create(req.body.post);
-		req.session.success = 'Post created successfully'
+		req.body.post.geometry = response.body.features[0].geometry;
+		let post = new Post(req.body.post);
+		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
+		post.save();
+		req.session.success = 'Post created successfully!';
 		res.redirect(`/posts/${post.id}`);
 	},
 	// Posts Show
@@ -54,7 +62,7 @@ module.exports = {
 			}
 		});
 		const floorRating = post.calculateAvgRating();
-		res.render('posts/show', { post, floorRating });
+		res.render('posts/show', { post, mapBoxToken, floorRating });
 	},
 	// Posts Edit
 	async postEdit(req, res, next) {
@@ -94,23 +102,23 @@ module.exports = {
 				});
 			}
 		}
-		
-		//check if location was updated
-		if (req.body.post.location !== post.location) {
+		// check if location was updated
+		if(req.body.post.location !== post.location) {
 			let response = await geocodingClient
 			  .forwardGeocode({
 			    query: req.body.post.location,
 			    limit: 1
 			  })
 			  .send();
-			post.coordinates = response.body.features[0].geometry.coordinates;
+			post.geometry = response.body.features[0].geometry;
 			post.location = req.body.post.location;
 		}
-		//update the post with any new properties
+		// update the post with any new properties
 		post.title = req.body.post.title;
 		post.description = req.body.post.description;
 		post.price = req.body.post.price;
-		//save the updated post into the db
+		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
+		// save the updated post into the db
 		post.save();
 		// redirect to show page
 		res.redirect(`/posts/${post.id}`);

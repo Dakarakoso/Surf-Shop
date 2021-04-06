@@ -103,3 +103,8 @@
 	<hr>
 <% }); %>
 
+<script>
+	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    mapboxgl.accessToken = "<%= mapBoxToken %>";
+    var post = { features: <%-JSON.stringify(post)%> };
+</script>
