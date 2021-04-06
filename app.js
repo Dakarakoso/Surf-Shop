@@ -12,6 +12,8 @@ const User = require('./models/user');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const seedPosts = require('./seeds');
+
 
 // require routes
 const index 	= require('./routes/index');
@@ -68,8 +70,9 @@ passport.deserializeUser(User.deserializeUser());
 // set title middleware
 app.use(function (req, res, next) {
   req.user = {
-    '_id': '6068b8ec290be7423f4986eb',
-      'username' : 'will',
+    // '_id': '6068b8ec290be7423f4986eb',
+    '_id': '606c502604a2c05a1b740b9e',
+      'username' : 'will3',
   }
   res.locals.currentUser = req.user;
   // set default page title

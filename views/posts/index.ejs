@@ -2,7 +2,9 @@
 
 <h1>Posts indexs!</h1>
 
-<% posts.forEach(function(post) { %>
+<% include ../partials/paginatePosts %>
+
+<% posts.docs.forEach(function(post) { %>
     <div>
         <h2>Title: <%= post.title %>
         </h2>
@@ -15,3 +17,5 @@
         <div><a href="/posts/<%= post.id %>"> View more</a></div>
     </div>
     <% }); %>
+
+<% include ../partials/paginatePosts %>
