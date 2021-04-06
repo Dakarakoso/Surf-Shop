@@ -20,7 +20,7 @@ const reviews = require('./routes/reviews');
 
 const app = express();
 //connect to the database
-const dbUrl = 'mongodb://localhost:27017/surf-shop-mapbox';
+const dbUrl = 'mongodb://localhost:27017/surf-shop';
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -45,8 +45,8 @@ app.use(express.static('public'));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
@@ -67,6 +67,11 @@ passport.deserializeUser(User.deserializeUser());
 
 // set title middleware
 app.use(function (req, res, next) {
+  req.user = {
+    '_id': '6068b8ec290be7423f4986eb',
+      'username' : 'will',
+  }
+  res.locals.currentUser = req.user;
   // set default page title
   res.locals.title = 'Surf Shop';
   // set success flash message

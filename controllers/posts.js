@@ -41,7 +41,14 @@ module.exports = {
 	},
 	// Posts Show
 	async postShow(req, res, next) {
-		let post = await Post.findById(req.params.id);
+		let post = await Post.findById(req.params.id).populate({
+			path: 'reviews',
+			options: { sort: { '_id': -1 } },
+			populate: {
+				path: 'author',
+				model: 'User'
+			}
+		});
 		res.render('posts/show', { post });
 	},
 	// Posts Edit
@@ -110,6 +117,7 @@ module.exports = {
 			await cloudinary.v2.uploader.destroy(image.public_id);
 		}
 		await post.remove();
+		req.session.success = 'Post deleted successfully!';
 		res.redirect('/posts');
 	}
 }

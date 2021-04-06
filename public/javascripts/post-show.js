@@ -21,3 +21,15 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrYXJha29zbyIsImEiOiJja200Njl2ZTgwMWpuMm9va
  .addTo(map);
  
 
+ // Toggle edit review form
+ $('.toggle-edit-form').on('click', function() {
+  // toggle the edit button text on click
+  $(this).text() === 'Edit' ? $(this).text('Cancel') : $(this).text('Edit');
+  // toggle visibility of the edit review form
+  $(this).siblings('.edit-review-form').toggle();
+});
+
+// Add click listener for cleaning of raring from edit/new form
+$('.clear-rating').click(function () {
+  $(this).siblings('.input-no-rate').click();
+});
