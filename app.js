@@ -6,7 +6,6 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const passport = require('passport');
 const User = require('./models/user');
 const session = require('express-session');
@@ -44,11 +43,11 @@ app.set('view engine', 'ejs');
 // set public assets directory
 app.use(express.static('public'));
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
@@ -69,11 +68,11 @@ passport.deserializeUser(User.deserializeUser());
 
 // set title middleware
 app.use(function (req, res, next) {
-  req.user = {
-    // '_id': '6068b8ec290be7423f4986eb',
-    '_id': '606c502604a2c05a1b740b9e',
-      'username' : 'will3',
-  }
+  // req.user = {
+  //   // '_id': '6068b8ec290be7423f4986eb',
+  //   '_id': '606c502604a2c05a1b740b9e',
+  //     'username' : 'will3',
+  // }
   res.locals.currentUser = req.user;
   // set default page title
   res.locals.title = 'Surf Shop';
