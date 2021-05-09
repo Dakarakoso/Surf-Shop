@@ -7,7 +7,7 @@ const PostSchema = new Schema({
 	title: String,
 	price: String,
 	description: String,
-	images: [ { path: String, filename: String } ],
+	images: [ { url: String, public_id: String } ],
 	location: String,
 	geometry: {
 		type: {
