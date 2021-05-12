@@ -5,7 +5,7 @@ const mongoosePaginate = require('mongoose-paginate');
 
 const PostSchema = new Schema({
 	title: String,
-	price: String,
+	price: Number,
 	description: String,
 	images: [ { url: String, public_id: String } ],
 	location: String,

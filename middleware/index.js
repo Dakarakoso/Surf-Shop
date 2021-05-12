@@ -147,8 +147,8 @@ async searchAndFilterPosts(req, res, next) {
 				max will search for all post documents with price
 				less than or equal to ($lte) the min value
 			*/
-			if (price.min) dbQueries.push({ price: { $gte: price.min } });
-			if (price.max) dbQueries.push({ price: { $lte: price.max } });
+			if (price.min) dbQueries.push({ price: { $gte: Number(price.min) } });
+			if (price.max) dbQueries.push({ price: { $lte: Number(price.max) } });
 		}
 		// check if avgRating exists, if it does then we know that the user
 		// submitted the search/filter form with a avgRating query (0 - 5 stars)
