@@ -5,7 +5,7 @@ const cities = require('./cities');
 
 async function seedPosts() {
     await Post.deleteMany({});
-    for (const i of new Array(600)) {
+    for (const i of new Array(20)) {
         const random1000 = Math.floor(Math.random() * 1000);
         const random5 = Math.floor(Math.random() * 6);
         const title = faker.lorem.word();
@@ -20,7 +20,12 @@ async function seedPosts() {
             },
             price: random1000,
 			avgRating: random5,
-            author: '6093593aae138937908f141d'
+            author: '6093593aae138937908f141d',
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/devsprout/image/upload/v1561315599/surf-shop/surfboard.jpg'
+                }
+            ]
         }
         let post = new Post(postData);
         post.properties.description = `<strong><a href="/posts/${post._id}">${title}</a></strong><p>${post.location}</p><p>${description.substring(0, 20)}...</p>`;
