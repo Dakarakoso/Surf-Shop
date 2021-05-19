@@ -1,47 +1,77 @@
 <% layout('layouts/boilerplate') -%>
 
-<h1><img src="<%= currentUser.image.secure_url %>" alt="<%= currentUser.username %>'s profile image" class="profile-image"><%= currentUser.username %>'s Profile</h1>
+<br>
+<div class="container d-flex justify-content-center align-items-center mt-12">
+    <div class="row">
+        <div class="col-md-10 offset-md-4 col-xl-8 offset-xl-2">
+            <div class="card shadow">
+                <img src="<%= currentUser.image.path %>" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Update Info</h5>
+                    <form action="/profile?_method=PUT" method="POST" class="validated-form" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" value="<%= currentUser.username %>" autofocus required>
+                            
+                        </div>
+                        <div>
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="text" id="email" name="email" placeholder="email" value="<%= currentUser.email %>">
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="current-password">Current Password <small>(required)</small> :</label>
+                            <input class="form-control" type="password" id="current-password" name="currentPassword" required placeholder="Current passord">
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="new-password">New Password</label>
+                            <input class="form-control" type="password" id="new-password" name="newPassword" placeholder="new password">
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password-confirmation">Password Confirmation</label>
+                            <input class="form-control" type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation">
+                        </div>
+                        <div>
+                            <label class="form-label" for="image">Image</label>
+                            <small>(this deletes existing)</small>
+                            <input  type="file" id="image" name="image">
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <button type="submit" id="update-profile" class="btn btn-success btn-block">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
 
-<p>Recent Posts:</p>
-
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+        <div class="list-group">
+            <h2 class="mb-2">Recent posts</h2>
 <% posts.forEach(function(post) { %>
-<div>
-	<a href="/posts/<%= post.id %>"><%= post.title %></a>
-</div>
-<% }); %>
+            <a href="/posts/<%= post.id %>" class="list-group-item list-group-item-action ">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= post.title %></h5>
+                <br>
+              </div>
+              <p class="mb-1"><%= post.description %> </p>
+              <small><i><%= post.location %></i></small>
+              <br>
+              <small>*3 days ago</small>
+            </a>
+            <% }); %>
+        </div>
+        </div>
+        </div>
 
-<p>Update Info:</p>
+        
 
-<form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" placeholder="username" value="<%= currentUser.username %>" autofocus required>
-	</div>
-	<div>
-		<label for="current-password">Current Password (required to update profile):</label>
-		<input type="password" id="current-password" name="currentPassword" placeholder="current password" required>
-	</div>
-	<div>
-		<label for="new-password">New Password:</label>
-		<input type="password" id="new-password" name="newPassword" placeholder="new password">
-	</div>
-	<div>
-		<label for="password-confirmation">Password Confirmation:</label>
-		<input type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation">
-	</div>
-	<div id="validation-message"></div>
-	<div>
-		<label for="email">Email:</label>
-		<input type="text" id="email" name="email" placeholder="email" value="<%= currentUser.email %>">
-	</div>
-	<div>
-		<label for="image">Image:</label>
-		<small>(this deletes existing)</small>
-		<input type="file" id="image" name="image">
-	</div>
 
-	<input type="submit" id="update-profile">
-</form>
 
 <script src="/javascripts/profile.js"></script>
 

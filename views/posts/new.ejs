@@ -1,15 +1,53 @@
 <% layout('layouts/boilerplate') -%> 
 
-<h1>New Post</h1>
-
-<form action="/posts" method="POST" enctype="multipart/form-data">
-    <div><input type="text" name="post[title]" placeholder="Title"></div>
-    <div><input type="number" name="post[price]" step=".01" placeholder="Price"></div>
-    <div>
-        <input type="file" accept="images/*" name="images" multiple>
-    </div>
-    <div><textarea name="post[description]" placeholder="Description"></textarea></div>
-    <div><input type="text" name="post[location]" placeholder="Location"></div>
-
-    <input type="submit">
-</form>
+<br>
+<div class="container d-flex justify-content-center align-items-center mt-12">
+    <div class="row">
+        <div class="col-md-10 offset-md-4 col-xl-8 offset-xl-2">
+            <div class="card shadow">
+                <img src="https://res.cloudinary.com/devsprout/image/upload/v1561315599/surf-shop/surfboard.jpg"
+                    alt="" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">New post</h5>
+                    <form action="/posts" method="POST" class="validated-form" novalidate enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label" for="post[title]">Title</label>
+                            <input class="form-control" type="text" name="post[title]" placeholder="Title">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="post[price]">Price</label>
+                            <input class="form-control" type="number" name="post[price]" step=".01" placeholder="Price">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Location</label>
+                            <input class="form-control" type="text" name="post[location]" placeholder="Location"></input>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Description</label>
+                            <textarea class="form-control" name="post[description]" placeholder="Description"></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                            <div class="form-file " style="margin-bottom: 10px;">
+                                <input type="file" class="form-file-input" id="images" name="images" multiple>
+						</div>
+						<br>
+                        <button type="submit"class="btn btn-success btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    
+                

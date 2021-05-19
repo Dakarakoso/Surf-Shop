@@ -25,10 +25,11 @@ module.exports = {
   async postRegister(req, res, next) {
     try {
       if (req.file) {
-        const { secure_url, public_id } = req.file;
-        req.body.image = { secure_url, public_id };
+        const { path, filename } = req.file;
+        req.body.image = { path, filename }
       }
       const user = await User.register(new User(req.body), req.body.password);
+      console.log(user);
       req.login(user, function(err) {
         if (err) return next(err);
         req.session.success = `Welcome to Surf Shop, ${user.username}!`;
@@ -80,10 +81,9 @@ module.exports = {
     if (username) user.username = username;
     if (email) user.email = email;
     if (req.file) {
-      if (user.image.public_id) await cloudinary.v2.uploader.destroy(user.image.public_id);
-      const { secure_url, public_id } = req.file;
-      user.image = { secure_url, public_id };
-    }
+      if (user.image.filename) await cloudinary.uploader.destroy(user.image.filename);
+      const { path, filename } = req.file;
+      user.image = { path, filename};      }
     await user.save();
     const login = util.promisify(req.login.bind(req));
     await login(user);
@@ -98,7 +98,7 @@ module.exports = {
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      req.session.error = 'No account with email exists.';
+      req.session.error = 'An account with that email does not exist.';
       return res.redirect('/forgot-password');
     }
     user.resetPasswordToken = token;

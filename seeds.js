@@ -5,7 +5,7 @@ const cities = require('./cities');
 
 async function seedPosts() {
     await Post.deleteMany({});
-    for (const i of new Array(20)) {
+    for (const i of new Array(100)) {
         const random1000 = Math.floor(Math.random() * 1000);
         const random5 = Math.floor(Math.random() * 6);
         const title = faker.lorem.word();
@@ -23,7 +23,7 @@ async function seedPosts() {
             author: '6093593aae138937908f141d',
             images: [
                 {
-                    url: 'https://res.cloudinary.com/devsprout/image/upload/v1561315599/surf-shop/surfboard.jpg'
+                    path: 'https://res.cloudinary.com/devsprout/image/upload/v1561315599/surf-shop/surfboard.jpg'
                 }
             ]
         }
@@ -31,7 +31,7 @@ async function seedPosts() {
         post.properties.description = `<strong><a href="/posts/${post._id}">${title}</a></strong><p>${post.location}</p><p>${description.substring(0, 20)}...</p>`;
         post.save();
     }
-    console.log('600 new posts created');
+    console.log('100 new posts created');
 }
 
 module.exports = seedPosts;

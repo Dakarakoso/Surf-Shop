@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%> </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Theme Styles -->
+     <link rel="stylesheet" href="/wrapkit/css/style.css" />
+     <link rel="stylesheet" href="/wrapkit/css/index-landingpage/landing-page.css" />
+     <!-- Custom Styles -->
+     <link rel="stylesheet" href="/stylesheets/style.css" />
+     <script defer src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" integrity="sha384-haqrlim99xjfMxRP6EWtafs0sB1WKcMdynwZleuUSwJR0mDeRYbhtY+KPMr+JL6f" crossorigin="anonymous"></script>
+</head>
+<body>
+    <% include ../partials/navbar %>
+    
+      
+
+    <div id="main-wrapper">
+     
+   
+         <!-- Page Wrapper  -->
+         <div class="page-wrapper">
+           <!-- Container fluid  -->
+           <div class="container-fluid">
+             <!-- Static Slider 10  -->
+             <div class="static-slider-head" style="background-image:url(/images/form-bg.jpg)">
+               <div class="container">
+                 <!-- Row  -->
+                 <div class="row justify-content-center">
+                   <!-- Column -->
+                   <div class="col-lg-8 col-md-6 align-self-center text-center" data-aos="fade-up" data-aos-duration="1200">
+                     <h1 class="title"><i class="fas fa-water"></i> Surf Shop</h1>
+                     <h4 class="subtitle font-light">Welcome to Surf Shop!</h4> 
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <!-- /Container fluid  -->
+         </div>
+
+         <% include ../partials/flash-message %>
+    <%- body -%>
+            
+    <% include ../partials/footer%>
+    <script src='/javascripts/validateForms.js'></script>
+</body>
+</html>

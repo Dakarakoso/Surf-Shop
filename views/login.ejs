@@ -1,18 +1,36 @@
-<% layout('layouts/boilerplate') -%>
+<% layout('layouts/forms') -%>
 
-<form action="/login" method="POST">
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" placeholder="username" required>
-	</div>
-	<div>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" placeholder="password" required>
-	</div>
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                <img src="/images/banner-bg.jpg"
+                    alt="" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">Login</h5>
+                    <form action="/login" method="POST" class="validated-form" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" autofocus required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
 
-	<input type="submit">
-</form>
-
-<div>
-	<a href="/forgot-password">Forgot password?</a>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                        <div>
+                            <a href="/forgot-password">Forgot password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

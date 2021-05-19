@@ -1,17 +1,18 @@
 <% layout('layouts/boilerplate') -%>
 
-<h1>Reset Password</h1>
-
-<form action="/reset/<%= token %>?_method=PUT" method="POST">
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="row">
+<form action="/reset/<%= token %>?_method=PUT" method="POST" class="form-group">
+	<h1 class="text-justify">Reset Password</h1>
 	<div>
 		<label for="password">New Password</label>
-		<input type="password" name="password" id="password" placeholder="New password" autofocus>
+	  <input type="password" class="form-control" name="password" id="password" placeholder="New password" >
 	</div>
 	<div>
 		<label for="confirm">Confirm Password</label>
-		<input type="password" name="confirm" id="confirm" placeholder="Confirm password">
+	  <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm password">
 	</div>
-	<div>
-		<input type="submit" value="Update Password">
-	</div>
-</form>
+	<button type="submit" style="margin-top: 10px;"class="btn btn-primary" value="Update Password">Submit</button>
+  </form>
+</div>
+</div>

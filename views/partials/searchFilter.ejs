@@ -1,42 +1,39 @@
+<div class="container d-flex justify-content-center align-items-center mt-5">
+	<div class="row">
 <form action="/posts" method="GET">
-	<fieldset>
-		<legend>Search</legend>
-		<label for="search">Search</label>
-		<input type="text" placeholder="Search" name="search" id="seach" value="<%= query.search %>">
-	</fieldset>
+	<div class="form-group">
+			<label for="search">Search</label>
+	  <input type="text" class="form-control" id="search" name="search" aria-describedby="emailHelp" placeholder="Search" value="<%= query.search %>">
+	</div>
+	<div class="form-group">
+	  <label for="location">Location</label>
+	  <input type="text" class="form-control" id="location" name="location" placeholder="Address or Zipcode" value="<%= query.location %>">
+	  <small><a href="#" id="use-my-location">use my location</a></small>
+	</div>
+	<div class="form-group form-check">
+	  <input type="radio" class="form-check-input" id="distance25" value="25" <%= query.distance === '25' ? 'checked' : '' %>>
+	  <label class="form-check-label" for="distance25">25 miles</label>
+	</div>
+	<div class="form-group form-check">
+		<input type="radio" class="form-check-input" id="distance50" value="50" <%= query.distance === '50' ? 'checked' : '' %>>
+		<label class="form-check-label" for="distance50">50 miles</label>
+	  </div>
+	<div class="form-group form-check">
+		<input type="radio" class="form-check-input" id="distance100" value="100" <%= query.distance === '100' ? 'checked' : '' %>>
+		<label class="form-check-label" for="distance100">100 miles</label>
+	  </div>
+	  <div>
+		<a href="#" id="clear-distance">clear</a>
+	</div>
 
-	<fieldset>
-	<div>
-  	<label for="location">Location</label>
-  	<input type="text" id="location" name="location" placeholder="Address or Zipcode" value="<%= query.location %>">
-  	<small><a href="#" id="use-my-location">use my location</a></small>
-  </div>
-		<legend>Distance (miles)</legend>
-  	<div>
-	    <input type="radio" name="distance" id="distance25" value="25" <%= query.distance === '25' ? 'checked' : '' %>>
-  	  <label for="distance25">25</label>
-  	</div>
-  	<div>
-	    <input type="radio" name="distance" id="distance50" value="50" <%= query.distance === '50' ? 'checked' : '' %>>
-  	  <label for="distance50">50</label>
-  	</div>
-  	<div>
-	    <input type="radio" name="distance" id="distance100" value="100" <%= query.distance === '100' ? 'checked' : '' %>>
-		  <label for="distance100">100</label>
-  	</div>
-  	<div>
-  		<a href="#" id="clear-distance">clear</a>
-  	</div>
-	</fieldset>
-
-	<fieldset>
+	<div class="form-group">
 		<legend>Price</legend>
 		<label for="min">Min</label>
-		<input type="number" id="min" name="price[min]" min="0" max="10000" step="1" placeholder="Min" value="<%= query.price ? query.price.min : '' %>">
+		<input type="number" id="min" class="form" name="price[min]" min="0" max="10000" step="1" placeholder="Min" value="<%= query.price ? query.price.min : '' %>">
 
 		<label for="max">Max</label>
-		<input type="number" id="max" name="price[max]" min="0" max="10000" step="1" step="1" placeholder="Max" value="<%= query.price ? query.price.max : '' %>">
-	</fieldset>
+		<input type="number" id="max" class="form" name="price[max]" min="0" max="10000" step="1" step="1" placeholder="Max" value="<%= query.price ? query.price.max : '' %>">
+	</div>
 
 	<fieldset>
 		<legend>Rating</legend>
@@ -53,9 +50,12 @@
 		<input type="checkbox" id="five-stars" name="avgRating[]" value="5" <%= query.avgRating && query.avgRating.includes('5') ? 'checked' : '' %>>
 		<label for="five-stars">5 stars</label>
 	</fieldset>
-	<div>
-		<a href="/posts">reset form</a>
-	</div>
 	
-	<input type="submit">
-</form>
+	<div style="margin: 20px 0">	
+		<button href="/posts" class="btn btn-warning">Reset form</button>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</div>
+</div>
