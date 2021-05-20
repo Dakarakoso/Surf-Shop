@@ -16,6 +16,7 @@ This project is for people who wants to sell surfboards. Users can creat an acco
 - Node.Js
 - MongoDB
 - Bootstrap
+- ejs
 
 # Setting up 
 
@@ -94,10 +95,22 @@ And the lastly change the variable `const dbUrl`
 + const dbUrl = 'mongodb://localhost:27017/surf-shop';
 ```
 
+# Npm
+
+learn more about npm here: https://docs.npmjs.com/about-npm
+
 Now run `npm install` to install all the node modules.
 
 ```
 npm install
 
 ```
+
+if you don't have already install nodemon and then from the surfshop directory run nodemon
+
+```
+nodemon
+
+```
+In your brwoser search tab type http://localhost:3000/
 
